@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "921314432461",
+    "project_id": "sinav-sistemi-2021",
+    "storage_bucket": "sinav-sistemi-2021.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:921314432461:android:5d848ba989e06aaa41e084",
+        "android_client_info": {
+          "package_name": "com.example.sinav_sistemi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "921314432461-7p2hm34q73npmit6iumoalhah36ppslk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sinav_sistemi",
+            "certificate_hash": "a7cca3e4ba0fa19b5e66212b101a0fecb4aa9ea9"
+          }
+        },
+        {
+          "client_id": "921314432461-dpa832ht1f4p2hd3h2ao38dj0fh6aidv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxXlRyZ6KKRYymsJUgpHKzMZ3-14qh1mQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "921314432461-dpa832ht1f4p2hd3h2ao38dj0fh6aidv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
