@@ -14,9 +14,6 @@ class _TeacherLoginState extends State<TeacherLogin> {
   final TextEditingController _passwordController = TextEditingController();
   AuthService _authService = AuthService();
   String _hata = "hata";
-  void register() {
-    //FirebaseAuth.instance
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

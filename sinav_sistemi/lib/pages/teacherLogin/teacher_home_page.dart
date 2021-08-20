@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sinav_sistemi/pages/teacherLogin/sinavHazirla/type_of_exam.dart';
 
 class TeacherHomePage extends StatefulWidget {
   @override
@@ -98,7 +99,14 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                           child: ListTile(
                             leading: Icon(Icons.east_outlined),
                             title: Text("1.Sınıf"),
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TypeOfExam(),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Container(
