@@ -20,11 +20,6 @@ class ApplicationHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      //initialRoute: '/',
-      /*  routes: {
-        '/ogrenciGirisi': (context) => OgrenciGirisi(),
-        '/ogretmenGirisi': (context) => ogretmenGirisi(),
-      },*/
       home: Scaffold(
         backgroundColor: Colors.white60,
         appBar: AppBar(
