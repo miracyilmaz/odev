@@ -1,27 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class MultipleChoiceQuestion {
-  late String soru;
-  late String a;
-  late String b;
-  late String c;
-  late String d;
-  late String e;
-  late String cevap;
-
-  MultipleChoiceQuestion(
-      this.soru, this.a, this.b, this.c, this.d, this.e, this.cevap);
-}
-
-class ClassicalQuestion {
-  late String soru;
-  late String cevap1;
-  late String cevap2;
-  late String cevap3;
-
-  ClassicalQuestion(this.soru, this.cevap1, this.cevap2, this.cevap3);
-}
+import 'package:sinav_sistemi/Model/QuestionModel.dart';
+import 'package:sinav_sistemi/services/QuestionService.dart';
 
 class Questions extends StatefulWidget {
   @override
@@ -29,18 +9,35 @@ class Questions extends StatefulWidget {
 }
 
 class _QuestionsState extends State<Questions> {
-  final TextEditingController _soru = TextEditingController();
-  final TextEditingController _a = TextEditingController();
-  final TextEditingController _b = TextEditingController();
-  final TextEditingController _c = TextEditingController();
-  final TextEditingController _d = TextEditingController();
-  final TextEditingController _e = TextEditingController();
-  final TextEditingController _cevap = TextEditingController();
-  final TextEditingController _bosluk1 = TextEditingController();
-  final TextEditingController _bosluk2 = TextEditingController();
-  final TextEditingController _bosluk3 = TextEditingController();
-  //AuthService _authService = AuthService();
-
+  final TextEditingController soru = TextEditingController();
+  final TextEditingController a = TextEditingController();
+  final TextEditingController b = TextEditingController();
+  final TextEditingController c = TextEditingController();
+  final TextEditingController d = TextEditingController();
+  final TextEditingController e = TextEditingController();
+  final TextEditingController cevap = TextEditingController();
+  final TextEditingController soru2 = TextEditingController();
+  final TextEditingController a2 = TextEditingController();
+  final TextEditingController b2 = TextEditingController();
+  final TextEditingController c2 = TextEditingController();
+  final TextEditingController d2 = TextEditingController();
+  final TextEditingController e2 = TextEditingController();
+  final TextEditingController soru3 = TextEditingController();
+  final TextEditingController a3 = TextEditingController();
+  final TextEditingController b3 = TextEditingController();
+  final TextEditingController c3 = TextEditingController();
+  final TextEditingController d3 = TextEditingController();
+  final TextEditingController e3 = TextEditingController();
+  final TextEditingController cevap2 = TextEditingController();
+  final TextEditingController cevap3 = TextEditingController();
+  final TextEditingController soru4 = TextEditingController();
+  final TextEditingController soru5 = TextEditingController();
+  final TextEditingController bosluk1 = TextEditingController();
+  final TextEditingController bosluk2 = TextEditingController();
+  final TextEditingController bosluk3 = TextEditingController();
+  final TextEditingController a2bosluk1 = TextEditingController();
+  final TextEditingController a2bosluk2 = TextEditingController();
+  final TextEditingController a2bosluk3 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,194 +56,79 @@ class _QuestionsState extends State<Questions> {
                 image: AssetImage('assets/images/backgraundImage.jpg'),
                 fit: BoxFit.cover),
           ),
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
-            color: Color.fromRGBO(0, 0, 0, 0.7),
-            height: 400,
-            width: 300,
-            child: ListView(
-              children: <Widget>[
-                TextFormField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
-                  controller: _soru,
-                  style: TextStyle(
-                    color: Colors.white,
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
+              color: Color.fromRGBO(0, 0, 0, 0.7),
+              height: 400,
+              width: 300,
+              child: ListView(
+                children: <Widget>[
+                  ClassicQuestion.classicQuestion().soruHazirla(
+                      context, "Soru 1", soru, a, b, c, d, e, cevap),
+                  SizedBox(
+                    height: 20.0,
                   ),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: 'Soru 1',
-                    prefixText: ' ',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusColor: Colors.white,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
+                  ClassicQuestion.classicQuestion().soruHazirla(
+                      context, "Soru 2", soru2, a2, b2, c2, d2, e2, cevap2),
+                  SizedBox(
+                    height: 20.0,
                   ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                TextFormField(
-                  controller: _a,
-                  style: TextStyle(
-                    color: Colors.white,
+                  ClassicQuestion.classicQuestion().soruHazirla(
+                      context, "Soru 3", soru3, a3, b3, c3, d3, e3, cevap3),
+                  SizedBox(
+                    height: 20.0,
                   ),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: 'A',
-                    prefixText: ' ',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusColor: Colors.white,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
+                  Question.question().boslukHazirla(
+                      context, "Soru 4", soru4, bosluk1, bosluk2, bosluk3),
+                  SizedBox(
+                    height: 20.0,
                   ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                TextFormField(
-                  controller: _b,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: 'B',
-                    prefixText: ' ',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusColor: Colors.white,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                TextFormField(
-                  controller: _c,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: 'C',
-                    prefixText: ' ',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusColor: Colors.white,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                TextFormField(
-                  controller: _d,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: 'D',
-                    prefixText: ' ',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusColor: Colors.white,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                TextFormField(
-                  controller: _e,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                  cursorColor: Colors.white,
-                  decoration: InputDecoration(
-                    labelText: 'E',
-                    prefixText: ' ',
-                    labelStyle: TextStyle(color: Colors.blue),
-                    focusColor: Colors.white,
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  child: RaisedButton(
-                    child: Text(
-                      'Sonraki Soruya Geç',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    color: Colors.blue,
-                    highlightColor: Colors.green,
-                    onPressed: () {
-                      MultipleChoiceQuestion(
-                        _soru.toString(),
-                        _a.toString(),
-                        _b.toString(),
-                        _c.toString(),
-                        _d.toString(),
-                        _e.toString(),
-                        _cevap.toString(),
-                        //buraya devam et
-                      );
-                    },
-                  ),
-                ),
-              ],
+                  Question.question().boslukHazirla(context, "Soru 5", soru5,
+                      a2bosluk1, a2bosluk2, a2bosluk3),
+                  buton(context),
+                ],
+              ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buton(BuildContext context) {
+    return Container(
+      child: RaisedButton(
+        child: Text(
+          'Sonraki Soruya Geç',
+          style: TextStyle(fontSize: 25.0),
+        ),
+        color: Colors.blue,
+        highlightColor: Colors.green,
+        onPressed: () {
+          ClassicQuestion Soru1 = new ClassicQuestion(
+              soru.text, a.text, b.text, c.text, d.text, e.text, "a");
+          ClassicQuestion Soru2 = new ClassicQuestion(
+              soru2.text, a2.text, b2.text, c2.text, d2.text, e2.text, "b");
+          ClassicQuestion Soru3 = new ClassicQuestion(
+              soru3.text, a3.text, b3.text, c3.text, d3.text, e3.text, "c");
+          Question Soru4 = new Question(
+              soru4.text, bosluk1.text, bosluk2.text, bosluk3.text);
+          Question Soru5 = new Question(
+              soru5.text, a2bosluk1.text, a2bosluk2.text, a2bosluk3.text);
+          QuestionService().createClassicQuestion("Mat", 1, Soru1.soru, Soru1.a,
+              Soru1.b, Soru1.c, Soru1.d, Soru1.e, Soru2.cevap);
+          QuestionService().createClassicQuestion("Mat", 2, Soru2.soru, Soru2.a,
+              Soru2.b, Soru2.c, Soru2.d, Soru2.e, Soru2.cevap);
+          QuestionService().createClassicQuestion("Mat", 3, Soru3.soru, Soru3.a,
+              Soru3.b, Soru3.c, Soru3.d, Soru3.e, Soru3.cevap);
+          QuestionService().createQuestion("Mat", 4, Soru4.soru, Soru4.bosluk1,
+              Soru4.bosluk2, Soru4.bosluk3);
+          QuestionService().createQuestion("Mat", 5, Soru5.soru, Soru5.bosluk1,
+              Soru5.bosluk2, Soru5.bosluk3);
+          print(a.text);
+          print(a.toString());
+        },
       ),
     );
   }

@@ -44,8 +44,6 @@ class AuthService {
 
   Future<User?> createStudentLesson(
       String name, String email, String password, lessonName, var user) async {
-    /* var user = await _auth.createUserWithEmailAndPassword(
-        email: email, password: password);*/
     await _firestore.collection("Student").doc(email).set({
       "email": email,
       "password": password,
