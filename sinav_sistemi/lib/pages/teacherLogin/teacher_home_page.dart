@@ -25,40 +25,24 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                 fit: BoxFit.cover),
           ),
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/backgraundImage2.jpg'),
+                  fit: BoxFit.cover),
+            ),
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/Atatürk.jpg'),
+                    fit: BoxFit.cover),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
+              /*margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
             color: Color.fromRGBO(255, 255, 255, 0.5),
             height: 400,
-            width: 300,
-            child: ListView(
-              children: <Widget>[
-                SizedBox(
-                  height: 30.0,
-                ),
-                Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/matematik.png'),
-                    ),
-                  ),
-                  child: FlatButton(
-                    padding: EdgeInsets.all(0.0),
-                    onPressed: () {
-                      /* Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SoruSayfasi(),
-                        ),
-                      );*/
-                    },
-                    child: Image.asset("assets/images/matematik.png"),
-                  ),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-              ],
+            width: 300,*/
             ),
           ),
         ),
@@ -98,12 +82,12 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                           margin: EdgeInsets.only(left: 15.0),
                           child: ListTile(
                             leading: Icon(Icons.east_outlined),
-                            title: Text("1.Sınıf"),
+                            title: Text("matematik"),
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => TypeOfExam(),
+                                  builder: (context) => TypeOfExam("matematik"),
                                 ),
                               );
                             },
@@ -113,24 +97,60 @@ class _TeacherHomePageState extends State<TeacherHomePage> {
                           margin: EdgeInsets.only(left: 15.0),
                           child: ListTile(
                             leading: Icon(Icons.east_outlined),
-                            title: Text("2. Sınıf"),
-                            onTap: () {},
+                            title: Text("turkce"),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TypeOfExam("turkce"),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 15.0),
                           child: ListTile(
                             leading: Icon(Icons.east_outlined),
-                            title: Text("3. Sınıf"),
-                            onTap: () {},
+                            title: Text("tarih"),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TypeOfExam("tarih"),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         Container(
                           margin: EdgeInsets.only(left: 15.0),
                           child: ListTile(
                             leading: Icon(Icons.east_outlined),
-                            title: Text("4. Sınıf"),
-                            onTap: () {},
+                            title: Text("kimya"),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TypeOfExam("kimya"),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(left: 15.0),
+                          child: ListTile(
+                            leading: Icon(Icons.east_outlined),
+                            title: Text("biyoloji"),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TypeOfExam("biyoloji"),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ],

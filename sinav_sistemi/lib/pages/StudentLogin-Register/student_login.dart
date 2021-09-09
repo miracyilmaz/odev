@@ -147,8 +147,11 @@ class _StudentLoginState extends State<StudentLogin> {
                 .signIn(_emailController.text, _passwordController.text)
                 .then(
               (value) {
-                return Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => StudentHomePage()));
+                return Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            StudentHomePage(_emailController.text)));
               },
             ).catchError(
               (onError) {

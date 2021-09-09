@@ -5,11 +5,11 @@ class QuestionService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<Question?> createClassicQuestion(
-      String lessonName, int soruNo, soru, a, b, c, d, e, cevap) async {
+      String lessonName, String soruNo, soru, a, b, c, d, e, cevap) async {
     await _firestore
         .collection("Sorular")
         .doc(lessonName)
-        .collection(soruNo.toString())
+        .collection(soruNo)
         .doc(soruNo.toString())
         .set({
       "Soru_No": soruNo,
@@ -20,9 +20,7 @@ class QuestionService {
       "d": d,
       "e": e,
       "cevap": cevap,
-    }).then((value) {
-      print("eklendi");
-    });
+    }).then((value) {});
   }
 
   Future<Question?> createQuestion(
@@ -38,8 +36,6 @@ class QuestionService {
       "1.seçenek": bosluk1,
       "2.secenek": bosluk2,
       "3.secenek": bosluk3,
-    }).then((value) {
-      print("eklendi");
-    });
+    }).then((value) {});
   }
 }

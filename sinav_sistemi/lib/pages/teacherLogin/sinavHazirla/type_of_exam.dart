@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sinav_sistemi/pages/teacherLogin/sinavHazirla/Questions.dart';
 
 class TypeOfExam extends StatefulWidget {
+  String lessonName;
+  TypeOfExam(this.lessonName);
+
   @override
   _TypeOfExamState createState() => _TypeOfExamState();
 }
 
 class _TypeOfExamState extends State<TypeOfExam> {
+  TextEditingController _passwordController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +19,7 @@ class _TypeOfExamState extends State<TypeOfExam> {
       backgroundColor: Colors.white60,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Sınav Hazırla'),
+        title: Text('Sınav Parolası'),
       ),
       body: SafeArea(
         child: Container(
@@ -26,31 +31,41 @@ class _TypeOfExamState extends State<TypeOfExam> {
           ),
           child: Container(
             margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
-            color: Color.fromRGBO(255, 255, 255, 0.5),
+            color: Color.fromRGBO(0, 0, 0, 0.7),
             height: 400,
             width: 300,
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 100.0,
+                  height: 200.0,
                 ),
                 Center(
-                  child: Container(
-                    child: RaisedButton(
-                      child: Text(
-                        'Vize Sınavı  Hazırla',
-                        style: TextStyle(fontSize: 25.0),
+                  child: TextFormField(
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    cursorColor: Colors.white,
+                    controller: _passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.vpn_key,
+                        color: Colors.white,
                       ),
-                      color: Colors.blue,
-                      highlightColor: Colors.green,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Questions(),
-                          ),
-                        );
-                      },
+                      labelText: "Parola",
+                      prefixText: ' ',
+                      labelStyle: TextStyle(color: Colors.blue),
+                      focusColor: Colors.white,
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -61,28 +76,60 @@ class _TypeOfExamState extends State<TypeOfExam> {
                   child: Container(
                     child: RaisedButton(
                       child: Text(
-                        'Final Sınavı  Hazırla',
-                        style: TextStyle(fontSize: 25.0),
-                      ),
-                      color: Colors.blue,
-                      highlightColor: Colors.green,
-                      onPressed: () {},
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Center(
-                  child: Container(
-                    child: RaisedButton(
-                      child: Text(
-                        'Bütünleme Sınavı Hazırla',
+                        'Onayla',
                         style: TextStyle(fontSize: 20.0),
                       ),
                       color: Colors.blue,
                       highlightColor: Colors.green,
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_passwordController.text == "matematik62") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Questions(widget.lessonName)));
+                        } else if (_passwordController.text == "turkce62") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Questions(widget.lessonName)));
+                        } else if (_passwordController.text == "tarih62") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Questions(widget.lessonName)));
+                        } else if (_passwordController.text == "kimya62") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Questions(widget.lessonName)));
+                        } else if (_passwordController.text == "biyoloji62") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      Questions(widget.lessonName)));
+                        } else {
+                          Alert(
+                            type: AlertType.warning,
+                            context: context,
+                            title: "Sifreyi Yanlis Girdiniz",
+                            buttons: [
+                              DialogButton(
+                                child: Text(
+                                  "KAPAT",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 24),
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                              ),
+                            ],
+                          ).show();
+                        }
+                      },
                     ),
                   ),
                 ),

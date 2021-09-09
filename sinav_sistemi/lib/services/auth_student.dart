@@ -25,8 +25,8 @@ class AuthService {
   }
 
   //kayıt ol fonksiyonu
-  Future<User?> createStudent(
-      String name, String email, String password) async {
+  Future<User?> createStudent(String stClass, String studentNumber, String name,
+      String phone, String url, String email, String password) async {
     var user = await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
 
@@ -35,7 +35,8 @@ class AuthService {
       "password": password,
     }).then((value) {
       for (int i = 0; i < 5; i++) {
-        createStudentLesson(name, email, password, lessons[i], user);
+        createStudentLesson(stClass, studentNumber, name, phone, url, email,
+            password, lessons[i], user);
       }
     });
 
@@ -43,7 +44,15 @@ class AuthService {
   }
 
   Future<User?> createStudentLesson(
-      String name, String email, String password, lessonName, var user) async {
+      String stClass,
+      String studentNumber,
+      String name,
+      String phone,
+      String url,
+      String email,
+      String password,
+      lessonName,
+      var user) async {
     await _firestore.collection("Student").doc(email).set({
       "email": email,
       "password": password,
@@ -66,31 +75,21 @@ class AuthService {
           .collection("Student")
           .doc(email)
           .collection("Lessons")
-          .doc(email)
-          .collection(lessonName)
-          .doc(email)
-          .collection("Notes")
+          .doc(lessonName)
+          .collection("Note")
           .doc(email)
           .set({
-        "vize": false,
-        "final": false,
-        "but": false,
-        "vize_not": 0,
-        "final_not": 0,
-        "but_not": 0
+        "girdiMi": "false",
+        "not": 0,
       });
       for (int i = 1; i < 15; i++) {
         _firestore
             .collection("Student")
             .doc(email)
             .collection("Lessons")
-            .doc(email)
-            .collection(lessonName)
-            .doc(email)
+            .doc(lessonName)
             .collection("absence_Information")
-            .doc(email)
-            .collection("Week_$i")
-            .doc(email)
+            .doc("Week_$i")
             .set({
           "Teorik_Ders1": false,
           "Teorik_Ders2": false,

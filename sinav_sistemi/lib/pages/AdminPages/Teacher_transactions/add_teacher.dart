@@ -18,7 +18,7 @@ class _AddTeacherState extends State<AddTeacher> {
   final TextEditingController _sicilNoController = TextEditingController();
   final TextEditingController _phoneNoController = TextEditingController();
   final TextEditingController _bransController = TextEditingController();
-  final _authService = TeacherAuthService();
+  final _authService = AdminService();
 
   @override
   Widget build(BuildContext context) {

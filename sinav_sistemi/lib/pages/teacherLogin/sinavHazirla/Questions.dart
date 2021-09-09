@@ -1,9 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:sinav_sistemi/Model/QuestionModel.dart';
 import 'package:sinav_sistemi/services/QuestionService.dart';
 
+import '../teacher_home_page.dart';
+
 class Questions extends StatefulWidget {
+  String lessonName;
+  Questions(this.lessonName);
   @override
   _QuestionsState createState() => _QuestionsState();
 }
@@ -45,7 +50,7 @@ class _QuestionsState extends State<Questions> {
       backgroundColor: Colors.white60,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(' Öğretmen Girişi'),
+        title: Text(' Sınav Olustur'),
       ),
       body: SafeArea(
         //child: form(),
@@ -100,34 +105,113 @@ class _QuestionsState extends State<Questions> {
     return Container(
       child: RaisedButton(
         child: Text(
-          'Sonraki Soruya Geç',
+          'Sınavı Yükle',
           style: TextStyle(fontSize: 25.0),
         ),
         color: Colors.blue,
         highlightColor: Colors.green,
         onPressed: () {
-          ClassicQuestion Soru1 = new ClassicQuestion(
-              soru.text, a.text, b.text, c.text, d.text, e.text, "a");
-          ClassicQuestion Soru2 = new ClassicQuestion(
-              soru2.text, a2.text, b2.text, c2.text, d2.text, e2.text, "b");
-          ClassicQuestion Soru3 = new ClassicQuestion(
-              soru3.text, a3.text, b3.text, c3.text, d3.text, e3.text, "c");
-          Question Soru4 = new Question(
-              soru4.text, bosluk1.text, bosluk2.text, bosluk3.text);
-          Question Soru5 = new Question(
-              soru5.text, a2bosluk1.text, a2bosluk2.text, a2bosluk3.text);
-          QuestionService().createClassicQuestion("Mat", 1, Soru1.soru, Soru1.a,
-              Soru1.b, Soru1.c, Soru1.d, Soru1.e, Soru2.cevap);
-          QuestionService().createClassicQuestion("Mat", 2, Soru2.soru, Soru2.a,
-              Soru2.b, Soru2.c, Soru2.d, Soru2.e, Soru2.cevap);
-          QuestionService().createClassicQuestion("Mat", 3, Soru3.soru, Soru3.a,
-              Soru3.b, Soru3.c, Soru3.d, Soru3.e, Soru3.cevap);
-          QuestionService().createQuestion("Mat", 4, Soru4.soru, Soru4.bosluk1,
-              Soru4.bosluk2, Soru4.bosluk3);
-          QuestionService().createQuestion("Mat", 5, Soru5.soru, Soru5.bosluk1,
-              Soru5.bosluk2, Soru5.bosluk3);
-          print(a.text);
-          print(a.toString());
+          if (soru.text != "" &&
+              a.text != "" &&
+              b.text != "" &&
+              c.text != "" &&
+              d.text != "" &&
+              e.text != "" &&
+              soru2.text != "" &&
+              a2.text != "" &&
+              b2.text != "" &&
+              c2.text != "" &&
+              d2.text != "" &&
+              e2.text != "" &&
+              soru3.text != "" &&
+              a3.text != "" &&
+              b3.text != "" &&
+              c3.text != "" &&
+              d3.text != "" &&
+              e3.text != "" &&
+              soru4.text != "" &&
+              bosluk1.text != "" &&
+              bosluk2.text != "" &&
+              bosluk3.text != "" &&
+              soru5.text != "" &&
+              a2bosluk1.text != "" &&
+              a2bosluk2.text != "" &&
+              a2bosluk3.text != "") {
+            ClassicQuestion Soru1 = new ClassicQuestion(
+                soru.text, a.text, b.text, c.text, d.text, e.text, "a");
+            ClassicQuestion Soru2 = new ClassicQuestion(
+                soru2.text, a2.text, b2.text, c2.text, d2.text, e2.text, "b");
+            ClassicQuestion Soru3 = new ClassicQuestion(
+                soru3.text, a3.text, b3.text, c3.text, d3.text, e3.text, "c");
+            Question Soru4 = new Question(
+                soru4.text, bosluk1.text, bosluk2.text, bosluk3.text);
+            Question Soru5 = new Question(
+                soru5.text, a2bosluk1.text, a2bosluk2.text, a2bosluk3.text);
+            QuestionService().createClassicQuestion(
+                widget.lessonName,
+                "1",
+                Soru1.soru,
+                Soru1.a,
+                Soru1.b,
+                Soru1.c,
+                Soru1.d,
+                Soru1.e,
+                Soru2.cevap);
+            QuestionService().createClassicQuestion(
+                widget.lessonName,
+                "2",
+                Soru2.soru,
+                Soru2.a,
+                Soru2.b,
+                Soru2.c,
+                Soru2.d,
+                Soru2.e,
+                Soru2.cevap);
+            QuestionService().createClassicQuestion(
+                widget.lessonName,
+                "3",
+                Soru3.soru,
+                Soru3.a,
+                Soru3.b,
+                Soru3.c,
+                Soru3.d,
+                Soru3.e,
+                Soru3.cevap);
+            QuestionService().createQuestion(widget.lessonName, 4, Soru4.soru,
+                Soru4.bosluk1, Soru4.bosluk2, Soru4.bosluk3);
+            QuestionService().createQuestion(widget.lessonName, 5, Soru5.soru,
+                Soru5.bosluk1, Soru5.bosluk2, Soru5.bosluk3);
+            Alert(
+              type: AlertType.warning,
+              context: context,
+              title: "Sınav başarıyla eklendi",
+            ).show();
+            Future.delayed(const Duration(milliseconds: 1000), () {
+              setState(() {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TeacherHomePage(),
+                  ),
+                );
+              });
+            });
+          } else {
+            Alert(
+              type: AlertType.warning,
+              context: context,
+              title: "bos alan bırakılamaz",
+              buttons: [
+                DialogButton(
+                  child: Text(
+                    "KAPAT",
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            ).show();
+          }
         },
       ),
     );

@@ -11,7 +11,11 @@ class student_register_page extends StatefulWidget {
 }
 
 class _student_register_pageState extends State<student_register_page> {
+  String _dropDownValue = "";
   String _hata = "hata";
+  final TextEditingController _numberController = TextEditingController();
+  final TextEditingController _imageController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -30,7 +34,6 @@ class _student_register_pageState extends State<student_register_page> {
         title: Text('Kaydol'),
       ),
       body: SafeArea(
-        //child: form(),
         child: Container(
           constraints: BoxConstraints.expand(),
           decoration: BoxDecoration(
@@ -38,24 +41,188 @@ class _student_register_pageState extends State<student_register_page> {
                 image: AssetImage('assets/images/backgraundImage.jpg'),
                 fit: BoxFit.cover),
           ),
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
-            color: Color.fromRGBO(0, 0, 0, 0.7),
-            height: 400,
-            width: 300,
-            child: Form(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: SingleChildScrollView(
+            child: Container(
+                margin: EdgeInsets.symmetric(vertical: 50.0, horizontal: 50.0),
+                color: Color.fromRGBO(0, 0, 0, 0.7),
+                height: 400,
+                width: 300,
+                child: ListView(
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
-                      child: CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage('assets/images/40.png'),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(bottom: 20.0),
+                          child: CircleAvatar(
+                            radius: 60,
+                            backgroundColor: Colors.white,
+                            backgroundImage: AssetImage('assets/images/40.png'),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.query_builder,
+                          color: Colors.white,
+                        ),
                       ),
+                      hint: _dropDownValue == ""
+                          ? Text(
+                              'Sınıf Bilgisi',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20.0),
+                            )
+                          : Text(
+                              _dropDownValue,
+                              style:
+                                  TextStyle(color: Colors.blue, fontSize: 20.0),
+                            ),
+                      isExpanded: true,
+                      iconSize: 30.0,
+                      style: TextStyle(color: Colors.blue, fontSize: 20.0),
+                      items: ['1.Sinif', '2.Sinif', '3.Sinif', '4.Sinif'].map(
+                        (val) {
+                          return DropdownMenuItem<String>(
+                            value: val,
+                            child: Text(val),
+                          );
+                        },
+                      ).toList(),
+                      onChanged: (val) {
+                        setState(
+                          () {
+                            _dropDownValue = val.toString();
+                          },
+                        );
+                      },
+                    ),
+                    TextFormField(
+                      controller: _numberController,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorColor: Colors.white,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.pin,
+                          color: Colors.white,
+                        ),
+                        labelText: "Ögrenci No",
+                        prefixText: ' ',
+                        labelStyle: TextStyle(color: Colors.blue),
+                        focusColor: Colors.white,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextFormField(
+                      controller: _nameController,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorColor: Colors.white,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: Colors.white,
+                        ),
+                        labelText: "Adı",
+                        prefixText: ' ',
+                        labelStyle: TextStyle(color: Colors.blue),
+                        focusColor: Colors.white,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextFormField(
+                      controller: _phoneController,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: Colors.white,
+                        ),
+                        labelText: "Telefon Numarası",
+                        prefixText: ' ',
+                        labelStyle: TextStyle(color: Colors.blue),
+                        focusColor: Colors.white,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    TextFormField(
+                      controller: _imageController,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                      cursorColor: Colors.white,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.image,
+                          color: Colors.white,
+                        ),
+                        labelText: "fotograf url",
+                        prefixText: ' ',
+                        labelStyle: TextStyle(color: Colors.blue),
+                        focusColor: Colors.white,
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
                     ),
                     TextFormField(
                       controller: _emailController,
@@ -69,9 +236,9 @@ class _student_register_pageState extends State<student_register_page> {
                           Icons.mail,
                           color: Colors.white,
                         ),
-                        hintText: 'E-Mail',
+                        labelText: "E-mail",
                         prefixText: ' ',
-                        hintStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.blue),
                         focusColor: Colors.white,
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -100,9 +267,9 @@ class _student_register_pageState extends State<student_register_page> {
                           Icons.vpn_key,
                           color: Colors.white,
                         ),
-                        hintText: 'Parola',
+                        labelText: "Parola",
                         prefixText: ' ',
-                        hintStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.blue),
                         focusColor: Colors.white,
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -131,9 +298,9 @@ class _student_register_pageState extends State<student_register_page> {
                           Icons.vpn_key,
                           color: Colors.white,
                         ),
-                        hintText: 'Parola Tekrar',
+                        labelText: "parola tekrar",
                         prefixText: ' ',
-                        hintStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.blue),
                         focusColor: Colors.white,
                         focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(
@@ -152,39 +319,30 @@ class _student_register_pageState extends State<student_register_page> {
                       height: 20.0,
                     ),
                     _registerButton(),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          top: size.height * .06, left: size.width * .02),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Row(
-                          children: [
-                            IconButton(
-                              onPressed: () => Navigator.pop(context),
-                              icon: Icon(
-                                Icons.arrow_back_ios_outlined,
-                                color: Colors.blue.withOpacity(.75),
-                                size: 26,
-                              ),
-                            ),
-                            SizedBox(
-                              width: size.width * 0.3,
-                            ),
-                            Text(
-                              "Kayıt ol",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.blue.withOpacity(.75),
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: Icon(
+                            Icons.arrow_back_ios_outlined,
+                            color: Colors.blue.withOpacity(.75),
+                            size: 26,
+                          ),
                         ),
-                      ),
-                    )
+                        SizedBox(
+                          width: size.width * 0.3,
+                        ),
+                        Text(
+                          "Kayıt ol",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.blue.withOpacity(.75),
+                              fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
                   ],
-                ),
-              ),
-            ),
+                )),
           ),
         ),
       ),
@@ -213,7 +371,13 @@ class _student_register_pageState extends State<student_register_page> {
         onPressed: () {
           try {
             _authService
-                .createStudent(_nameController.text, _emailController.text,
+                .createStudent(
+                    _dropDownValue,
+                    _numberController.text,
+                    _nameController.text,
+                    _phoneController.text,
+                    _imageController.text,
+                    _emailController.text,
                     _passwordController.text)
                 .then(
               (value) {
